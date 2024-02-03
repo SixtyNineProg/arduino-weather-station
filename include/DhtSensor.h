@@ -8,10 +8,8 @@ DHT dht(DHTPIN, DHTTYPE, 6);
 
 class DhtSensor
 {
-private:
-    /* data */
 public:
-    DhtSensor(/* args */);
+    DhtSensor();
     ~DhtSensor();
     float getHumidity();
     float getTemperature();
@@ -20,7 +18,7 @@ public:
     void initSensor();
 };
 
-DhtSensor::DhtSensor(/* args */)
+DhtSensor::DhtSensor()
 {
 }
 

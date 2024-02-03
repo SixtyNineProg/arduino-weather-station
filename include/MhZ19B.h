@@ -9,16 +9,14 @@ MHZ19_uart mhz19;
 
 class MhZ19B
 {
-private:
-    /* data */
 public:
-    MhZ19B(/* args */);
+    MhZ19B();
     ~MhZ19B();
     int getPPM();
     void initSensor();
 };
 
-MhZ19B::MhZ19B(/* args */)
+MhZ19B::MhZ19B()
 {
 }
 

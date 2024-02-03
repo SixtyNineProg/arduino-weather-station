@@ -10,10 +10,8 @@
 
 class Display
 {
-private:
-    /* data */
 public:
-    Display(/* args */);
+    Display();
     ~Display();
     U8GLIB_SSD1306_128X32 u8g;
 
@@ -21,7 +19,7 @@ public:
     void draw(float humidity, float temperatureFahrenheit, float heatIndex, int PPM);
 };
 
-Display::Display(/* args */)
+Display::Display()
 {
     this->u8g = (U8G_I2C_OPT_NONE);
 }
@@ -50,7 +48,7 @@ void Display::draw(float humidity, float temperature, float heatIndex, int PPM)
 
         u8g.setFont(u8g_font_timB10r);
         u8g.setPrintPos(0, 32);
-        String htIx = "TI: ";
+        String htIx = "t: ";
         htIx.concat(heatIndex);
         u8g.print(htIx);
 
