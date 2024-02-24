@@ -17,7 +17,7 @@ public:
     LiquidCrystal_I2C lcd;
 
     void init();
-    void draw(float dhtHumidity, float dhtTemperature, float bmeHumidity, float bmeTemperature, float bmePressure, int ppm);
+    void draw(float bmeHumidity, float bmeTemperature, float bmePressure, int ppm);
 };
 
 // адрес дисплея 0x3f или 0x27
@@ -33,15 +33,14 @@ void Lcd1602Display::init()
     lcd.backlight();
 }
 
-void Lcd1602Display::draw(float dhtHumidity, float dhtTemperature, float bmeHumidity, float bmeTemperature, float bmePressure, int ppm)
+void Lcd1602Display::draw(float bmeHumidity, float bmeTemperature, float bmePressure, int ppm)
 {
     lcd.setCursor(0, 0);
-    lcd.print("dH:" + String(dhtHumidity));
-    lcd.setCursor(0, 1);
-    lcd.print("dT:" + String(dhtTemperature));
-
-    lcd.setCursor(9, 0);
     lcd.print("H:" + String(bmeHumidity));
-    lcd.setCursor(9, 1);
+    lcd.setCursor(0, 1);
     lcd.print("T:" + String(bmeTemperature));
+    lcd.setCursor(8, 0);
+    lcd.print("P:" + String(bmePressure));
+    lcd.setCursor(8, 1);
+    lcd.print("PPM:" + String(ppm));
 };
