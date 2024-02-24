@@ -1,30 +1,37 @@
 #include <Arduino.h>
-#include <GyverBME280.h>  
-#include "Display.h"
+#include <GyverBME280.h>
+#include "U8glibDisplay.h"
+#include "Lcd1602Display.h"
 #include "DhtSensor.h"
 #include "MhZ19B.h"
 #include "Sd.h"
 
-Display display;
-DhtSensor dht11;
+#define STRING(Value) #Value
+
+U8glibDisplay u8glibdisplay;
+Lcd1602Display lcd1602Display;
+DhtSensor dhtSensor;
 MhZ19B mhZ19B;
 GyverBME280 bme;
 
 void setup()
 {
-  Serial.begin(9600);
-  dht11.initSensor();
-  mhZ19B.initSensor();
+  lcd1602Display.init();
+  dhtSensor.init();
+  mhZ19B.init();
   bme.begin();
 }
 
 void loop()
 {
   delay(1000);
-  float humidity = dht11.getHumidity();
-  float temperature = dht11.getTemperature();
+  float dhtHumidity = dhtSensor.getHumidity();
+  float dhtTemperature = dhtSensor.getTemperature();
+  float bmeHumidity = bme.readHumidity();
   float bmeTemperature = bme.readTemperature();
+  float bmePressure = bme.readPressure();
   int ppm = mhZ19B.getPPM();
 
-  display.draw(humidity, temperature, bmeTemperature, ppm);
+  u8glibdisplay.draw(bmePressure, ppm);
+  lcd1602Display.draw(dhtHumidity, dhtTemperature, bmeHumidity, bmeTemperature, bmePressure, ppm);
 }

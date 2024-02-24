@@ -2,7 +2,7 @@
 #include <Adafruit_Sensor.h>
 
 #define DHTPIN 4 // what pin we're connected to
-#define DHTTYPE DHT11
+#define DHTTYPE DHT22
 
 DHT dht(DHTPIN, DHTTYPE, 6);
 
@@ -15,7 +15,7 @@ public:
     float getTemperature();
     float getTemperatureFahrenheit();
     float getHeatIndex(float temperatureFahrenheit, float humidity);
-    void initSensor();
+    void init();
 };
 
 DhtSensor::DhtSensor()
@@ -46,7 +46,7 @@ float DhtSensor::getHeatIndex(float temperatureFahrenheit, float humidity)
     return dht.computeHeatIndex(temperatureFahrenheit, humidity);
 }
 
-void DhtSensor::initSensor()
+void DhtSensor::init()
 {
     dht.begin();
     Serial.println("Dht init successfull");

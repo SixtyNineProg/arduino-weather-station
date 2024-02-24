@@ -13,7 +13,7 @@ public:
     MhZ19B();
     ~MhZ19B();
     int getPPM();
-    void initSensor();
+    void init();
 };
 
 MhZ19B::MhZ19B()
@@ -29,10 +29,10 @@ int MhZ19B::getPPM()
     return mhz19.getPPM();
 }
 
-void MhZ19B::initSensor()
+void MhZ19B::init()
 {
     mhz19.begin(MHZ_TX, MHZ_RX);
-    mhz19.setAutoCalibration(false);
+    mhz19.setAutoCalibration(true);
     mhz19.getStatus();
     delay(500);
     if (mhz19.getStatus() == 0)

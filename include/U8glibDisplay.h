@@ -8,27 +8,23 @@
 
 #include "U8glib.h"
 
-class Display
+class U8glibDisplay
 {
 public:
-    Display();
-    ~Display();
+    U8glibDisplay();
     U8GLIB_SSD1306_128X32 u8g;
 
     // display SSD1306_128X32
     void draw(float humidity, float temperatureFahrenheit, float heatIndex, int PPM);
+    void draw(float bmePressure, int PPM);
 };
 
-Display::Display()
+U8glibDisplay::U8glibDisplay()
 {
     this->u8g = (U8G_I2C_OPT_NONE);
 }
 
-Display::~Display()
-{
-}
-
-void Display::draw(float humidity, float temperature, float heatIndex, int PPM)
+void U8glibDisplay::draw(float humidity, float temperature, float heatIndex, int PPM)
 {
     u8g.firstPage();
     do
@@ -54,6 +50,27 @@ void Display::draw(float humidity, float temperature, float heatIndex, int PPM)
 
         u8g.setFont(u8g_font_timB10r);
         u8g.setPrintPos(60, 32);
+        String ppm = "PPM: ";
+        ppm.concat(PPM);
+        u8g.print(ppm);
+
+    } while (u8g.nextPage());
+};
+
+void U8glibDisplay::draw(float bmePressure, int PPM)
+{
+    u8g.firstPage();
+    do
+    {
+        // print sensor value
+        u8g.setFont(u8g_font_timB10r);
+        u8g.setPrintPos(30, 12);
+        String pressure = "p: ";
+        pressure.concat(bmePressure);
+        u8g.print(pressure);
+
+        u8g.setFont(u8g_font_timB10r);
+        u8g.setPrintPos(30, 32);
         String ppm = "PPM: ";
         ppm.concat(PPM);
         u8g.print(ppm);
