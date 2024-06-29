@@ -4,8 +4,8 @@ MHZ19_uart mhz19;
 #define MHZ_RX 2
 #define MHZ_TX 3
 
-#define CO2_MIN 300
-#define CO2_MAX 2000
+#define CO2_MIN 0
+#define CO2_MAX 5000
 
 class MhZ19B
 {
