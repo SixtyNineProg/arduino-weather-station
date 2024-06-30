@@ -11,7 +11,6 @@ GyverBME280 bme;
 
 void setup()
 {
-  Serial.begin(9600);
   lcd1602Display.init();
   mhZ19B.init();
   bme.begin();
@@ -24,8 +23,6 @@ void loop()
   float bmeTemperature = bme.readTemperature();
   float bmePressure = bme.readPressure() * 0.7500637554192 / 100; // mmHg
   int ppm = mhZ19B.getPPM();
-
-  Serial.println(bmeTemperature);
 
   lcd1602Display.draw(bmeHumidity, bmeTemperature, bmePressure, ppm);
 }
