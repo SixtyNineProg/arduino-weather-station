@@ -5,8 +5,8 @@
 
 #define STRING(Value) #Value
 
-SoftwareSerial sdsSerial(3, 4); // RX, TX for SDS011
-SoftwareSerial mhzSerial(5, 6); // RX, TX for MH-Z19B
+SoftwareSerial sdsSerial(2, 3); // RX, TX for SDS011
+SoftwareSerial mhzSerial(4, 5); // RX, TX for MH-Z19B
 
 Lcd1602Display lcd1602Display;
 GyverBME280 bme;
