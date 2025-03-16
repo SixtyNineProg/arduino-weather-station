@@ -32,7 +32,7 @@ void setup()
   // Initialize MH-Z19B (no specific setup needed beyond serial)
   mhzSensor.begin();
 
-  delay(5000); // warm-up for SDS011 fan
+  delay(5000); // warm-up
 }
 
 void loop()
