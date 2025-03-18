@@ -124,15 +124,15 @@ bool SDS011Service::readMeasurement(float& pm25, float& pm10) {
             // Calculate and return PM values
             pm25 = (sdsData[2] + sdsData[3] * 256) / 10.0;
             pm10 = (sdsData[4] + sdsData[5] * 256) / 10.0;
-            return true;  // Success
+            return true;
           } else {
             Serial.println("SDS011 checksum or tail error");
-            return false;  // Failure
+            return false;
           }
         }
       }
     }
   }
   Serial.println("SDS011 timeout - no valid data");
-  return false;  // Failure
+  return false;
 }
