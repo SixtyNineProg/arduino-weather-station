@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <GyverBME280.h>
-#include "Lcd1602Display.h"
+#include "Lcd2004Display.h"
 #include <SoftwareSerial.h>
 #include "SDS011Service.h"
 #include "MHZ19BService.h"
@@ -13,7 +13,7 @@ SoftwareSerial mhzSerial(2, 3); // RX, TX for MH-Z19B
 SDS011Service sdsSensor(&sdsSerial);
 MHZ19BService mhzSensor(&mhzSerial);
 
-Lcd1602Display lcd1602Display;
+Lcd2004Display lcd2004Display;
 GyverBME280 bme;
 
 float bmeHumidity = 0.0;
@@ -23,17 +23,17 @@ int co2 = 0;
 float pm25 = 0.0;
 float pm10 = 0.0;
 
-unsigned long lastSdsReadTime = 0;              // Time of the last SDS011 reading
-unsigned long sdsWarmupStartTime = 0;           // Time when SDS011 warmup started
-bool isSdsWarmingUp = false;                    // Flag indicating warmup in progress
-bool isFirstSdsRead = true;                     // Flag for initial SDS011 reading
+unsigned long lastSdsReadTime = 0;    // Time of the last SDS011 reading
+unsigned long sdsWarmupStartTime = 0; // Time when SDS011 warmup started
+bool isSdsWarmingUp = false;          // Flag indicating warmup in progress
+bool isFirstSdsRead = true;           // Flag for initial SDS011 reading
 const unsigned long SDS_READ_INTERVAL = 600000;
 const unsigned long SDS_WARMUP_TIME = 30000;
 
 void setup()
 {
   Serial.begin(9600);
-  lcd1602Display.init();
+  lcd2004Display.init();
   bme.begin();
 
   // Initialize MH-Z19B
@@ -137,7 +137,7 @@ void loop()
   readMhz19b();
   manageSds011();
 
-  lcd1602Display.draw(bmeHumidity, bmeTemperature, bmePressure, co2, pm25, pm10);
+  lcd2004Display.draw(bmeHumidity, bmeTemperature, (int)round(bmePressure), co2, pm25, pm10);
 
   delay(5000); // Pause between iterations
 }
