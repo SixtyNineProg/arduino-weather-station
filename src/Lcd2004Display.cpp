@@ -17,21 +17,21 @@ void Lcd2004Display::draw(float bmeHumidity, float bmeTemperature, int bmePressu
 {
     // Row 0: Humidity and Temperature
     lcd.setCursor(0, 0);
-    lcd.print("H:");
+    lcd.print("H: ");
     lcd.print(bmeHumidity, 1);
     lcd.print("%");
     lcd.setCursor(10, 0);
-    lcd.print("T:");
-    lcd.print(bmeTemperature, 1);
-    lcd.print("C");
+    lcd.print("P: ");
+    lcd.print(bmePressure);
+    lcd.print("hPa");
 
     // Row 1: Pressure and CO2
     lcd.setCursor(0, 1);
-    lcd.print("P:");
-    lcd.print(bmePressure);
-    lcd.print("hPa");
-    lcd.setCursor(10, 1);
-    lcd.print("CO2:");
+    lcd.print("T: ");
+    lcd.print(bmeTemperature, 1);
+    lcd.print("C");
+    lcd.setCursor(9, 1);
+    lcd.print("CO2: ");
     lcd.print(ppm);
     lcd.print("ppm");
 
